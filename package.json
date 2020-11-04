@@ -1,50 +1,52 @@
 {
-  "name": "pollproject",
-  "version": "1.0.0",
-  "description": "Excercise in creating a polling project",
-  "main": "./server/server.js",
-  "scripts": {
-    "build": "webpack --config client/webpack.config.js",
-    "build:watch": "nodemon --watch client --watch components --ignore bundle.js --ignore bundle.js.map -e * --exec npm run build",
-    "server": "node server/server.js",
-    "server:watch": "nodemon --watch server -e * --exec npm run server",
-    "start": " npm-run-all --parallel build:watch server:watch"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/un-loop/PollProject.git"
-  },
-  "author": "Michael Armes",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/un-loop/PollProject/issues"
-  },
-  "homepage": "https://github.com/un-loop/PollProject#readme",
-  "dependencies": {
-    "@babel/core": "^7.4.4",
-    "@babel/runtime": "^7.4.4",
-    "aws-sdk": "^2.456.0",
-    "axios": "^0.18.0",
-    "koa": "^2.7.0",
-    "koa-bodyparser": "^4.2.1",
-    "koa-decode-params": "^1.0.0",
-    "koa-mount": "^4.0.0",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-material-ui-form-validator": "^2.0.8",
-    "unloop-database-dynamo": "^1.3.2",
-    "unloop-resource-builder": "^2.0.1",
-    "unloop-static-router": "^1.0.0",
-    "webpack": "^4.31.0"
-  },
-  "devDependencies": {
-    "@babel/plugin-transform-runtime": "^7.4.4",
-    "@babel/preset-env": "^7.4.4",
-    "@babel/preset-react": "^7.0.0",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^8.0.6",
-    "nodemon": "^1.19.0",
-    "npm-run-all": "^4.1.5",
-    "webpack-cli": "^3.3.2"
-  }
+    "name": "pollproject",
+    "version": "1.0.0",
+    "description": "Excercise in creating a polling project",
+    "main": "./server/server.js",
+    "scripts": {
+        "build": "webpack --config client/webpack.config.js",
+        "build:watch": "nodemon --watch client --watch components --ignore bundle.js --ignore bundle.js.map -e '*' --exec npm run build",
+        "server": "node server/server.js",
+        "server:watch": "nodemon --watch server -e '*' --exec npm run server",
+        "start": " npm-run-all --parallel build:watch server:watch"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/un-loop/PollProject.git"
+    },
+    "author": "Michael Armes",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/un-loop/PollProject/issues"
+    },
+    "homepage": "https://github.com/un-loop/PollProject#readme",
+    "dependencies": {
+        "@babel/core": "^7.4.4",
+        "@babel/runtime": "^7.4.4",
+        "@material-ui/core": "^4.11.0",
+        "@material-ui/icons": "^4.9.1",
+        "aws-sdk": "^2.456.0",
+        "axios": "^0.18.0",
+        "koa": "^2.7.0",
+        "koa-bodyparser": "^4.2.1",
+        "koa-decode-params": "^1.0.0",
+        "koa-mount": "^4.0.0",
+        "react": "^16.8.6",
+        "react-dom": "^16.8.6",
+        "react-material-ui-form-validator": "^2.0.8",
+        "unloop-database-dynamo": "^1.3.2",
+        "unloop-resource-builder": "^2.0.1",
+        "unloop-static-router": "^1.0.0",
+        "webpack": "^4.31.0"
+    },
+    "devDependencies": {
+        "@babel/plugin-transform-runtime": "^7.4.4",
+        "@babel/preset-env": "^7.4.4",
+        "@babel/preset-react": "^7.0.0",
+        "babel-core": "^6.26.3",
+        "babel-loader": "^8.0.6",
+        "nodemon": "^1.19.0",
+        "npm-run-all": "^4.1.5",
+        "webpack-cli": "^3.3.2"
+    }
 }

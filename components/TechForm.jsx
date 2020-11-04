@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export default class CatForm extends React.Component {
+export default class TechForm extends React.Component {
     constructor(props) {
         super(props);
 
@@ -31,13 +31,17 @@ export default class CatForm extends React.Component {
     render() {
         return (
             <form onSubmit={this.onSubmit} onReset={this.onReset}>
-                <input type="text" name="name" placeholder="name" value={this.props.name} onChange={this.onChange} />
-                <input type="text" name="age" placeholder="age" value={this.props.age} onChange={this.onChange} />
-                <input type="text" name="owner" placeholder="owner" value={this.props.owner} onChange={this.onChange} />
+                <input
+                    type="text"
+                    name="Text"
+                    placeholder="Technology"
+                    value={this.props.Text}
+                    onChange={this.onChange}
+                />
+
                 <input type="submit" value="Submit" />
                 <input type="reset" value="Cancel" />
             </form>
-        )
+        );
     }
 }
-
