@@ -13,7 +13,7 @@ const staticRouter = require("unloop-static-router")(
         },
     ]
 );
-//change cats to tech
+
 const builderWithMiddleware = resourceBuilder(decode());
 const tech = builderWithMiddleware("tech"); //has to match exactly to filename string
 

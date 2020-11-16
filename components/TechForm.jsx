@@ -3,7 +3,6 @@ import * as React from "react";
 export default class TechForm extends React.Component {
     constructor(props) {
         super(props);
-
         this.props = props;
         this.onSubmit = this.onSubmit.bind(this);
         this.onChange = this.onChange.bind(this);
@@ -12,19 +11,16 @@ export default class TechForm extends React.Component {
 
     onSubmit(e) {
         e.preventDefault();
-
-        this.props.onSave && this.props.onSave.call(this);
+        this.props.onSubmit && this.props.onSubmit(e.target);
     }
 
     onChange(e) {
         e.preventDefault();
-
         this.props.onChange && this.props.onChange(e.target);
     }
 
     onReset(e) {
         e.preventDefault();
-
         this.props.onReset && this.props.onReset(e.target);
     }
 
@@ -33,9 +29,9 @@ export default class TechForm extends React.Component {
             <form onSubmit={this.onSubmit} onReset={this.onReset}>
                 <input
                     type="text"
-                    name="Text"
+                    name="name"
                     placeholder="Technology"
-                    value={this.props.Text}
+                    value={this.props.tech.name || ""}
                     onChange={this.onChange}
                 />
 

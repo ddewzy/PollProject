@@ -12,6 +12,7 @@ export default class TechPage extends React.Component {
         this.onAdd = this.onAdd.bind(this);
         this.onCancel = this.onCancel.bind(this);
         this.onSave = this.onSave.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     onAdd(e) {
@@ -33,6 +34,24 @@ export default class TechPage extends React.Component {
             .catch
             //todo: set an error condition
             ();
+    }
+
+    //if user types nothing state shouldn't change
+    onSubmit(target) {
+        this.setState((state, props) => {
+            const updatedTech = state.tech.slice();
+            updatedTech.push({ ...state.newTech, count: 0 });
+            return { tech: updatedTech, newTech: {} };
+        });
+
+        if (newTech.length < 1) {
+            //is newTech correct?
+            setNameError("New Tech must be at least 1 character");
+            return;
+        }
+
+        setNameError(false); //need to set const
+        setNicknameChosen(true); //need to set const
     }
 
     onCancel() {
@@ -92,6 +111,7 @@ export default class TechPage extends React.Component {
                         onChange={this.onChange}
                         onSave={this.onSave}
                         onReset={this.onCancel}
+                        onSubmit={this.onSubmit}
                     />
                 )}
                 {this.state.tech && this.state.tech.length && (
@@ -100,6 +120,7 @@ export default class TechPage extends React.Component {
                         incrementFn={(index) => this.increment(index)}
                         decrementFn={(index) => this.decrement(index)}
                         deleteFn={(index) => this.remove(index)}
+                        onSubmit={(index) => this.onSubmit(index)}
                     />
                 )}
             </div>

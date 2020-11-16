@@ -1,0 +1,31 @@
+GET http://localhost:3000/api/tech
+
+###
+
+GET http://localhost:3000/api/tech/HTML
+
+###
+
+POST http://localhost:3000/api/tech
+content-type: application/json
+
+{
+    "name": "React",
+    "count": 0
+}
+
+###
+
+DELETE http://localhost:3000/api/tech/HTTP
+
+###
+
+PUT http://localhost:3000/api/tech/DOM
+content-type: application/json
+
+{
+    "name": "DOM",
+    "count": 5
+}
+
+###

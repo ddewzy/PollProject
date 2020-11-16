@@ -1,8 +1,8 @@
-const AWS= require("aws-sdk");
+const AWS = require("aws-sdk");
 
 const config = {
     maxRetries: 1,
-    httpOptions: { timeout: 30000, connectTimeout: 15000 }
+    httpOptions: { timeout: 30000, connectTimeout: 15000 },
 };
 
 class DbContext {

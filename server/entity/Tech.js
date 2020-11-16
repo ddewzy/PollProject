@@ -8,7 +8,7 @@ const key = "name";
 exports.key = key;
 
 exports.schema = {
-    TableName: "Tech", //change
+    TableName: "Tech",
     BillingMode: "PROVISIONED",
     KeySchema: [{ AttributeName: key, KeyType: "HASH" }],
     AttributeDefinitions: [{ AttributeName: key, AttributeType: "S" }],
@@ -34,6 +34,10 @@ exports.initialData = [
     },
     {
         name: "Angular",
+        count: 0,
+    },
+    {
+        name: "React",
         count: 0,
     },
 ];
