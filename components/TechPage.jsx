@@ -16,7 +16,6 @@ export default class TechPage extends React.Component {
 
     onAdd(e) {
         e.preventDefault();
-
         this.setState({ adding: true });
     }
 
