@@ -44,7 +44,7 @@ module.exports = (entity) => {
                 name,
                 count,
             }))(ctx.request.body);
-            const result = await tech.update(ctx.params.tech, techObj);
+            const result = await tech.update(techObj, ctx.params.tech);
             ctx.status = 200;
             ctx.body = result;
         },

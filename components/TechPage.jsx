@@ -3,16 +3,17 @@ import * as axios from "axios";
 import TechList from "./TechList";
 import TechForm from "./TechForm";
 
+const getNewTech = () => ({ name: "", count: 0 });
+
 export default class TechPage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { adding: false, newTech: {} };
+        this.state = { adding: false, newTech: getNewTech() };
         this.props = props;
         this.onChange = this.onChange.bind(this);
         this.onAdd = this.onAdd.bind(this);
         this.onCancel = this.onCancel.bind(this);
         this.onSave = this.onSave.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
     }
 
     onAdd(e) {
@@ -30,28 +31,9 @@ export default class TechPage extends React.Component {
         axios
             .post("/api/tech/", this.state.newTech)
             .then(() => this.load())
-            .then(this.setState({ newTech: {}, adding: false }))
-            .catch
-            //todo: set an error condition
-            ();
-    }
-
-    //if user types nothing state shouldn't change
-    onSubmit(target) {
-        this.setState((state, props) => {
-            const updatedTech = state.tech.slice();
-            updatedTech.push({ ...state.newTech, count: 0 });
-            return { tech: updatedTech, newTech: {} };
-        });
-
-        if (newTech.length < 1) {
-            //is newTech correct?
-            setNameError("New Tech must be at least 1 character");
-            return;
-        }
-
-        setNameError(false); //need to set const
-        setNicknameChosen(true); //need to set const
+            .then(this.setState({ newTech: getNewTech(), adding: false }))
+            .catch();
+        //todo: set an error condition
     }
 
     onCancel() {
@@ -64,34 +46,47 @@ export default class TechPage extends React.Component {
 
     increment(techIndex) {
         return () => {
-            this.setState((state, props) => {
-                const updatedTech = state.tech.slice();
-                updatedTech[techIndex].count++;
-                return { tech: updatedTech };
-            });
+            const updatedTech = this.state.tech.slice();
+            updatedTech[techIndex].count++;
+
+            axios
+                .put(
+                    `/api/tech/${this.state.tech[techIndex].name}`,
+                    updatedTech[techIndex]
+                )
+                .then(() => this.load())
+                .then(this.setState({ newTech: getNewTech(), adding: false }))
+                .catch(); //error message
+
+            // return { tech: updatedTech };
         };
     }
 
     decrement(techIndex) {
         return () => {
-            this.setState((state, props) => {
-                if (state.tech[techIndex].count === 0) {
-                    return state;
-                }
-                const updatedTech = state.tech.slice();
-                updatedTech[techIndex].count--;
-                return { tech: updatedTech };
-            });
+            if (this.state.tech[techIndex].count === 0) {
+                return state;
+            }
+            const updatedTech = this.state.tech.slice();
+            updatedTech[techIndex].count--;
+
+            axios
+                .put(
+                    `/api/tech/${this.state.tech[techIndex].name}`,
+                    updatedTech[techIndex]
+                )
+                .then(() => this.load())
+                .then(this.setState({ newTech: getNewTech(), adding: false }))
+                .catch(); //error message
         };
     }
 
     remove(techIndex) {
         return () => {
-            this.setState((state, props) => {
-                const updatedTech = [...state.tech];
-                updatedTech.splice(techIndex, 1);
-                return { tech: updatedTech };
-            });
+            axios
+                .delete(`/api/tech/${this.state.tech[techIndex].name}`)
+                .then(() => this.load())
+                .catch(); //error message
         };
     }
 
@@ -109,9 +104,8 @@ export default class TechPage extends React.Component {
                     <TechForm
                         tech={this.state.newTech}
                         onChange={this.onChange}
-                        onSave={this.onSave}
                         onReset={this.onCancel}
-                        onSubmit={this.onSubmit}
+                        onSubmit={this.onSave}
                     />
                 )}
                 {this.state.tech && this.state.tech.length && (
@@ -120,7 +114,6 @@ export default class TechPage extends React.Component {
                         incrementFn={(index) => this.increment(index)}
                         decrementFn={(index) => this.decrement(index)}
                         deleteFn={(index) => this.remove(index)}
-                        onSubmit={(index) => this.onSubmit(index)}
                     />
                 )}
             </div>
